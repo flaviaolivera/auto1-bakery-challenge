@@ -1,0 +1,12 @@
+.thumbnail {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: all 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+}
