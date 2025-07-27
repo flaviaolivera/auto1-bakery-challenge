@@ -1,0 +1,43 @@
+@import '../../../styles/variables';
+
+.custom-btn {
+  border-radius: 8px; 
+  font-weight: 600;
+  border: none;
+  transition: all 0.2s ease;
+  box-shadow: $box-shadow;
+  position: relative;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.05);
+  }
+
+  &:active:not(:disabled) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.95);
+  }
+}
+
+.loading {
+  pointer-events: none;
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #60A5FA 0%, $primary-color 100%);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+    color: white;
+  }
+
+  &:active:not(:disabled) {
+    background: linear-gradient(135deg, $primary-color 0%, #1E3A8A 100%);
+    color: white;
+  }
+}

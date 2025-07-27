@@ -1,3 +1,6 @@
+// .storybook/preview.js
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 /** @type { import('@storybook/react-webpack5').Preview } */
 const preview = {
   parameters: {

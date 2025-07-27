@@ -1,0 +1,60 @@
+@import '../../../styles/variables';
+
+.icon-btn {
+  border-radius: 50%;
+  border: none;
+  background-color: #E2E8F0;
+  color: $text-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  box-shadow: $box-shadow;
+
+  &:hover:not(:disabled) {
+    background-color: #CBD5E0;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    filter: brightness(0.95);
+  }
+
+  &:active:not(:disabled) {
+    background-color: #A0AEC0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    filter: brightness(0.9);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    background-color: $disabled-color;
+    color: $text-secondary;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $box-shadow;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.125rem rgba(99, 102, 241, 0.4);
+  }
+}
+
+.small {
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 0.75rem;
+}
+
+.medium {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.875rem;
+}
+
+.large {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+}

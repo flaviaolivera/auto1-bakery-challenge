@@ -1,5 +1,3 @@
-
-
 /** @type { import('@storybook/react-webpack5').StorybookConfig } */
 const config = {
   "stories": [
