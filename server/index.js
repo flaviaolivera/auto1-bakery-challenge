@@ -1,9 +1,15 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 3001;
 const app = express();
 const jsonParser = bodyParser.json()
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 let storage = [
   { name: 'Croissant', stock: 12, price: 1.7 },
@@ -45,6 +51,4 @@ app.post("/api/order", jsonParser, (req, res) => {
   res.json({message: 'success'});
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+module.exports = app;
