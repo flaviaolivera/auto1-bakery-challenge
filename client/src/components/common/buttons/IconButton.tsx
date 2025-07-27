@@ -20,7 +20,6 @@ export const IconButton: React.FC<IconButtonProps> = ({
   const IconComponent = Icons[icon] as React.ComponentType;
 
   if (!IconComponent) {
-    console.warn(`Icon "${icon}" not found in react-icons/fi`);
     return null;
   }
 
