@@ -20,9 +20,10 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/build/$1"
+      "dest": "/client/$1"
     }
   ],
-  "installCommand": "cd client && npm install && cd ../server && npm install",
-  "buildCommand": "cd client && npm run build"
+  "installCommand": "cd client && npm install",
+  "buildCommand": "cd client && npm run build",
+  "outputDirectory": "client/build"
 }
