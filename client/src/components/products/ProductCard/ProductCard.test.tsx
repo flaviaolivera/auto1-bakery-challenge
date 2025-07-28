@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ProductCard } from './ProductCard';
-import { Product } from '../../types';
+import { Product } from '../../../types';
 
 const mockProduct: Product = {
   id: '1',

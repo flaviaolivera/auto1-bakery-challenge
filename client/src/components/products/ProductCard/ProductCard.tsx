@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Product } from '../../types';
-import { Button } from '../common/buttons';
-import { Select, SelectOption } from '../common/forms/Select/Select';
-import { formatPrice } from '../../utils';
+import { Product } from '../../../types';
+import { Button } from '../../common/buttons';
+import { Select, SelectOption } from '../../common/forms/Select/Select';
+import { formatPrice } from '../../../utils';
 import styles from './ProductCard.module.scss';
 
 interface ProductCardProps {
