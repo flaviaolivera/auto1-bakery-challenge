@@ -7,7 +7,7 @@ export interface IconButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   size?: 'small' | 'medium' | 'large';
-  'aria-label'?: string;
+  children?: React.ReactNode;
 }
 
 export const IconButton: React.FC<IconButtonProps> = ({
@@ -15,7 +15,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   onClick,
   disabled = false,
   size = 'medium',
-  'aria-label': ariaLabel,
+  children,
 }) => {
   const IconComponent = Icons[icon] as React.ComponentType;
 
@@ -37,9 +37,10 @@ export const IconButton: React.FC<IconButtonProps> = ({
       className={buttonClasses}
       onClick={onClick}
       disabled={disabled}
-      aria-label={ariaLabel || `${icon} button`}
+      aria-label={ `${icon} button`}
     >
       <IconComponent />
+      {children}
     </button>
   );
 };

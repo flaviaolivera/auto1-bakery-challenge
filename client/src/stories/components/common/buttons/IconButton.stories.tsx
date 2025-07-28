@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
+import type { Meta, StoryObj } from '@storybook/react';
 import { IconButton } from '../../../../components/common/buttons/IconButton/IconButton';
 
 const meta: Meta<typeof IconButton> = {
@@ -6,65 +6,109 @@ const meta: Meta<typeof IconButton> = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   argTypes: {
     icon: {
-      control: { type: 'select' },
-      description: 'Icon name from react-icons/fi'
+      description: 'Icon name from react-icons/fi',
+      control: { type: 'text' }
     },
     size: {
       control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
-      description: 'Button size'
+      options: ['small', 'medium', 'large']
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onClick: {
-      action: 'clicked',
+      action: 'clicked'
     },
+    children: {
+      control: false
+    }
   }
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Plus: Story = {
+export const Default: Story = {
   args: {
-    icon: 'FiPlus',
-  }
-};
-
-export const Minus: Story = {
-  args: {
-    icon: 'FiMinus', 
+    icon: 'FiHome',
+    size: 'medium'
   }
 };
 
 export const Small: Story = {
   args: {
-    icon: 'FiPlus',
-    size: 'small',
-  }
-};
-
-export const Medium: Story = {
-  args: {
-    icon: 'FiPlus',
-    size: 'medium',
+    icon: 'FiUser',
+    size: 'small'
   }
 };
 
 export const Large: Story = {
   args: {
-    icon: 'FiPlus',
-    size: 'large',
+    icon: 'FiSettings',
+    size: 'large'
   }
 };
 
 export const Disabled: Story = {
   args: {
-    icon: 'FiPlus',
-    disabled: true,
+    icon: 'FiTrash',
+    size: 'medium',
+    disabled: true
+  }
+};
+
+export const WithBadge: Story = {
+  render: (args) => (
+    <div className="position-relative d-inline-block">
+      <IconButton {...args}>
+        <span className="position-absolute badge rounded-pill bg-danger" style={{
+          top: '-5px',
+          right: '-8px',
+          fontSize: '0.7rem',
+          minWidth: '18px',
+          height: '18px',
+          lineHeight: '1',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: '600'
+        }}>
+          3
+        </span>
+      </IconButton>
+    </div>
+  ),
+  args: {
+    icon: 'FiShoppingCart',
+    size: 'medium'
+  }
+};
+
+export const WithNotificationBadge: Story = {
+  render: (args) => (
+    <div className="position-relative d-inline-block">
+      <IconButton {...args}>
+        <span className="position-absolute badge rounded-pill bg-primary" style={{
+          top: '-5px',
+          right: '-8px',
+          fontSize: '0.7rem',
+          minWidth: '18px',
+          height: '18px',
+          lineHeight: '1',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: '600'
+        }}>
+          99+
+        </span>
+      </IconButton>
+    </div>
+  ),
+  args: {
+    icon: 'FiBell',
+    size: 'large'
   }
 };
