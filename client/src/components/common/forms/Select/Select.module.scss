@@ -1,0 +1,14 @@
+@import '../../../../styles/variables';
+
+.select {
+  transition: all 0.2s ease-in-out;
+  
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: darken($primary-color, 10%);
+  }
+}
