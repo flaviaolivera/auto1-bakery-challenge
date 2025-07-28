@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 
 export interface ButtonProps {
   label: string;
-  variant?: 'gradient-blue' | 'secondary';
+  variant?: 'gradient-blue' | 'secondary' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
@@ -22,8 +22,12 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   type = 'button',
 }) => {
-  const baseClasses = `btn ${styles['custom-btn']}`;
-  const variantClass = variant ? styles[variant] : '';
+  const isCustomVariant = variant === 'gradient-blue';
+  
+  const baseClasses = 'btn';
+  const variantClass = isCustomVariant 
+    ? `${styles['custom-btn']} ${styles[variant]}` 
+    : `btn-${variant}`;
   const sizeClass = `btn-${size}`;
   const fullWidthClass = fullWidth ? 'w-100' : '';
   const loadingClass = loading ? styles.loading : '';
