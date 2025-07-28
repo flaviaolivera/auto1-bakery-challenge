@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Icon } from '../../../../components/common/media/Icon';
+import { Icon } from '../../../../components/common/media/Icon/Icon';
 
 const meta: Meta<typeof Icon> = {
   component: Icon,

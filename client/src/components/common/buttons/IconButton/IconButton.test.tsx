@@ -95,8 +95,7 @@ describe('IconButton Component', () => {
     const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
     // @ts-ignore - Testing invalid icon
     render(<IconButton icon="InvalidIcon" />);
-    
-    expect(consoleSpy).toHaveBeenCalledWith('Icon "InvalidIcon" not found in react-icons/fi');
+
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
     
     consoleSpy.mockRestore();

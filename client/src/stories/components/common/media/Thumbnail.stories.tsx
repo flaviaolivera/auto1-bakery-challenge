@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Thumbnail } from '../../../../components/common/media/Thumbnail';
+import { Thumbnail } from '../../../../components/common/media/Thumbnail/Thumbnail';
 
 const meta: Meta<typeof Thumbnail> = {
   component: Thumbnail,
