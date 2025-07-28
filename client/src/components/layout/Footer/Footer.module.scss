@@ -1,0 +1,44 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  margin-top: auto; 
+}
+
+.brandName {
+  color: $text-primary;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.linkedinLink {
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: darken($primary-color, 15%);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brandName {
+    font-size: 1rem;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+  }
+}
