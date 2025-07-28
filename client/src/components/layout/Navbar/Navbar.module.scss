@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+
+.navbar {
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.brand {
+  color: $text-primary;
+  font-weight: 600;
+  font-size: 1.25rem;
+  border: none;
+  background: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .brand {
+    font-size: 1.1rem;
+  }
+}
