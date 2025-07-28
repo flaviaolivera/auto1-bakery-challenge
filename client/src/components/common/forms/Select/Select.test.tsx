@@ -2,10 +2,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Select, SelectOption } from './Select';
 
 const mockOptions: SelectOption[] = [
-  { value: 1, label: 'Opción 1' },
-  { value: 2, label: 'Opción 2' },
-  { value: 'three', label: 'Opción 3' },
-  { value: 4, label: 'Opción 4', disabled: true },
+  { value: 1, label: 'Option 1' },
+  { value: 2, label: 'Option 2' },
+  { value: 'three', label: 'Option 3' },
+  { value: 4, label: 'Option 4', disabled: true },
 ];
 
 const mockOnChange = jest.fn();
@@ -20,13 +20,13 @@ describe('Select', () => {
       <Select
         options={mockOptions}
         onChange={mockOnChange}
-        placeholder="Selecciona una opción"
+        placeholder="Select option"
       />
     );
 
     const select = screen.getByRole('combobox');
     expect(select).toBeInTheDocument();
-    expect(screen.getByText('Selecciona una opción')).toBeInTheDocument();
+    expect(screen.getByText('Select option')).toBeInTheDocument();
   });
 
   it('renders all options', () => {
@@ -104,7 +104,7 @@ describe('Select', () => {
       />
     );
 
-    const disabledOption = screen.getByText('Opción 4');
+    const disabledOption = screen.getByText('Option 4');
     expect(disabledOption).toHaveAttribute('disabled');
   });
 
@@ -140,7 +140,7 @@ describe('Select', () => {
       />
     );
 
-    expect(screen.getByText('Seleccionar...')).toBeInTheDocument();
+    expect(screen.getByText('Select...')).toBeInTheDocument();
   });
 
   it('handles empty value correctly', () => {

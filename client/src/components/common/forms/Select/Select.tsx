@@ -21,14 +21,13 @@ export const Select: React.FC<SelectProps> = ({
   options,
   value,
   onChange,
-  placeholder = 'Seleccionar...',
+  placeholder = 'Select...',
   disabled = false,
   size = 'md',
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
     
-    // Convert back to number if the original option value was a number
     const option = options.find(opt => opt.value.toString() === selectedValue);
     if (option) {
       onChange(option.value);

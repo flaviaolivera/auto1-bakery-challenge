@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 
 export interface ButtonProps {
   label: string;
-  variant?: 'gradient-blue';
+  variant?: 'gradient-blue' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
