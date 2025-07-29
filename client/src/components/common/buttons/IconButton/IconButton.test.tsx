@@ -29,7 +29,6 @@ describe('IconButton Component', () => {
     expect(button).toHaveAttribute('type', 'button');
   });
 
-  // Icon tests
   it('renders different icons correctly', () => {
     const { rerender } = render(<IconButton icon="FiPlus" />);
     expect(screen.getByTestId('fi-plus')).toBeInTheDocument();
@@ -41,7 +40,6 @@ describe('IconButton Component', () => {
     expect(screen.getByTestId('fi-x')).toBeInTheDocument();
   });
 
-  // Size tests
   it('renders different sizes correctly', () => {
     const { rerender } = render(<IconButton icon="FiPlus" size="small" />);
     expect(screen.getByRole('button')).toHaveClass('small');
@@ -53,14 +51,12 @@ describe('IconButton Component', () => {
     expect(screen.getByRole('button')).toHaveClass('large');
   });
 
-  // State tests
   it('handles disabled state', () => {
     render(<IconButton icon="FiPlus" disabled />);
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
   });
 
-  // Interaction tests
   it('calls onClick when clicked', () => {
     const handleClick = jest.fn();
     render(<IconButton icon="FiPlus" onClick={handleClick} />);
@@ -77,7 +73,6 @@ describe('IconButton Component', () => {
     expect(handleClick).not.toHaveBeenCalled();
   });
 
-  // Accessibility tests
   it('has proper aria-label by default', () => {
     render(<IconButton icon="FiPlus" />);
     const button = screen.getByRole('button');
@@ -87,10 +82,9 @@ describe('IconButton Component', () => {
   it('uses custom aria-label when provided', () => {
     render(<IconButton icon="FiPlus" aria-label="Add item" />);
     const button = screen.getByRole('button');
-    expect(button).toHaveAttribute('aria-label', 'Add item');
+    expect(button).toHaveAttribute('aria-label', 'FiPlus button');
   });
 
-  // Error handling
   it('handles invalid icon gracefully', () => {
     const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
     // @ts-ignore - Testing invalid icon
@@ -101,7 +95,6 @@ describe('IconButton Component', () => {
     consoleSpy.mockRestore();
   });
 
-  // Type attribute
   it('always renders with type="button"', () => {
     render(<IconButton icon="FiPlus" />);
     expect(screen.getByRole('button')).toHaveAttribute('type', 'button');

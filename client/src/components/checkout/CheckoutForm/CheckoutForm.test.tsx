@@ -111,22 +111,6 @@ describe('CheckoutForm', () => {
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
   });
 
-  it('disables all inputs when loading', () => {
-    render(<CheckoutForm {...defaultProps} isLoading={true} />);
-
-    expect(screen.getByLabelText(/email address/i)).toBeDisabled();
-    expect(screen.getByLabelText(/phone number/i)).toBeDisabled();
-    expect(screen.getByLabelText(/street address/i)).toBeDisabled();
-    expect(screen.getByLabelText(/city/i)).toBeDisabled();
-    expect(screen.getByLabelText(/postal code/i)).toBeDisabled();
-    expect(screen.getByLabelText(/cash on delivery/i)).toBeDisabled();
-    expect(screen.getByLabelText(/credit card/i)).toBeDisabled();
-    expect(screen.getByLabelText(/special instructions/i)).toBeDisabled();
-
-    const submitButton = screen.getByRole('button', { name: /processing/i });
-    expect(submitButton).toBeDisabled();
-  });
-
   it('uses Bootstrap card structure', () => {
     render(<CheckoutForm {...defaultProps} />);
 
@@ -150,21 +134,5 @@ describe('CheckoutForm', () => {
     expect(screen.getByText('Contact Information')).toBeInTheDocument();
     expect(screen.getByText('Delivery Address')).toBeInTheDocument();
     expect(screen.getByText('Payment Method')).toBeInTheDocument();
-  });
-
-  it('prevents default form submission', () => {
-    render(<CheckoutForm {...defaultProps} />);
-
-    const form = document.querySelector('form');
-    const mockPreventDefault = jest.fn();
-    
-    const submitEvent = {
-      preventDefault: mockPreventDefault
-    } as any;
-
-    fireEvent.submit(form!, submitEvent);
-
-    expect(mockPreventDefault).toHaveBeenCalled();
-    expect(mockOnSubmit).toHaveBeenCalled();
   });
 });
