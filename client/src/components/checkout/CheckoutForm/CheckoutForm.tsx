@@ -1,13 +1,13 @@
 import React from 'react';
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
-import { CustomerInfo } from '../../../types/CustomerInfo';
+import { CustomerInfoForm } from '../../../schemas/checkoutSchema';
 import { Button } from '../../common/buttons/Button/Button';
 import styles from './CheckoutForm.module.scss';
 
 interface CheckoutFormProps {
   onSubmit: () => void;
-  register: UseFormRegister<CustomerInfo>;
-  errors: FieldErrors<CustomerInfo>;
+  register: UseFormRegister<CustomerInfoForm>;
+  errors: FieldErrors<CustomerInfoForm>;
   isLoading?: boolean;
 }
 
@@ -173,7 +173,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
               </div>
               {errors.paymentMethod && (
                 <div className="text-danger mt-2">
-                  {errors.paymentMethod.message}
+                  {typeof errors.paymentMethod.message === 'string' && errors.paymentMethod.message}
                 </div>
               )}
             </div>

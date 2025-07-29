@@ -10,9 +10,11 @@ export const customerInfoSchema = z.object({
   email: z.email('Invalid email address'),
   phone: z.string().min(6, 'Phone number is too short'),
   address: addressSchema,
-  paymentMethod: z.enum(['cash', 'card'] as const, {
-  message: 'Select a payment method',
-}),
+  paymentMethod: z
+  .string()
+  .refine((val) => val === 'cash' || val === 'card', {
+    message: 'Select a payment method',
+  }),
   specialInstructions: z.string().optional(),
 });
 
