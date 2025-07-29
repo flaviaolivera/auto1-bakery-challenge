@@ -22,23 +22,20 @@ function App() {
         </AnimatePresence>
         
         <Toaster
-          position="top-right"
+          position="top-left"
           toastOptions={{
             duration: 2000,
             style: {
-              background: '#363636',
               color: '#fff',
             },
             success: {
               style: {
                 background: '#4ade80',
-                color: '#fff',
               },
             },
             error: {
               style: {
                 background: '#ef4444',
-                color: '#fff',
               },
             },
           }}
