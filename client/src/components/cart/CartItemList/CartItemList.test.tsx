@@ -25,9 +25,22 @@ jest.mock('../../common/buttons/Button/Button', () => ({
     </button>
   )
 }));
+
 jest.mock('../CartItem/CartItem', () => ({
-  CartItem: ({ cartItem }: { cartItem: CartItemType }) => (
-    <div data-testid={`cart-item-${cartItem.product.id}`}>
+  CartItem: ({ 
+    cartItem, 
+    canIncrease, 
+    canDecrease 
+  }: { 
+    cartItem: CartItemType;
+    canIncrease?: boolean;
+    canDecrease?: boolean;
+  }) => (
+    <div 
+      data-testid={`cart-item-${cartItem.product.id}`}
+      data-can-increase={canIncrease}
+      data-can-decrease={canDecrease}
+    >
       {cartItem.product.name} - Quantity: {cartItem.quantity}
     </div>
   )
@@ -59,15 +72,21 @@ describe('CartItemList', () => {
 
   const mockOnQuantityChange = jest.fn();
   const mockOnRemove = jest.fn();
+  const mockCanIncreaseQuantity = jest.fn();
+  const mockCanDecreaseQuantity = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
+    mockCanIncreaseQuantity.mockReturnValue(true);
+    mockCanDecreaseQuantity.mockReturnValue(true);
   });
 
   const defaultProps = {
     items: mockCartItems,
     onQuantityChange: mockOnQuantityChange,
     onRemove: mockOnRemove,
+    canIncreaseQuantity: mockCanIncreaseQuantity,
+    canDecreaseQuantity: mockCanDecreaseQuantity,
   };
 
   it('renders all cart items when items are provided', () => {
@@ -111,7 +130,7 @@ describe('CartItemList', () => {
 
     const shopNowButton = screen.getByTestId('shop-now-button');
     expect(shopNowButton).toHaveAttribute('data-variant', 'dark');
-    expect(shopNowButton).toHaveAttribute('data-size', 'lg');
+    expect(shopNowButton).toHaveAttribute('data-size', 'md');
   });
 
   it('passes correct props to CartItem components', () => {
@@ -119,6 +138,45 @@ describe('CartItemList', () => {
 
     expect(screen.getByTestId('cart-item-1')).toBeInTheDocument();
     expect(screen.getByTestId('cart-item-2')).toBeInTheDocument();
+  });
+
+  it('calls canIncreaseQuantity and canDecreaseQuantity functions correctly', () => {
+    render(<CartItemList {...defaultProps} />);
+
+    expect(mockCanIncreaseQuantity).toHaveBeenCalledWith('1');
+    expect(mockCanIncreaseQuantity).toHaveBeenCalledWith('2');
+    expect(mockCanDecreaseQuantity).toHaveBeenCalledWith('1');
+    expect(mockCanDecreaseQuantity).toHaveBeenCalledWith('2');
+  });
+
+  it('passes canIncrease and canDecrease values to CartItem components', () => {
+    mockCanIncreaseQuantity.mockImplementation((id) => id === '1');
+    mockCanDecreaseQuantity.mockImplementation((id) => id === '2');
+
+    render(<CartItemList {...defaultProps} />);
+
+    const cartItem1 = screen.getByTestId('cart-item-1');
+    const cartItem2 = screen.getByTestId('cart-item-2');
+
+    expect(cartItem1).toHaveAttribute('data-can-increase', 'true');
+    expect(cartItem1).toHaveAttribute('data-can-decrease', 'false');
+    expect(cartItem2).toHaveAttribute('data-can-increase', 'false');
+    expect(cartItem2).toHaveAttribute('data-can-decrease', 'true');
+  });
+
+  it('uses default canDecreaseQuantity when not provided', () => {
+    const propsWithoutCanDecrease = {
+      ...defaultProps,
+      canDecreaseQuantity: undefined,
+    };
+
+    render(<CartItemList {...propsWithoutCanDecrease} />);
+
+    const cartItem1 = screen.getByTestId('cart-item-1');
+    const cartItem2 = screen.getByTestId('cart-item-2');
+
+    expect(cartItem1).toHaveAttribute('data-can-decrease', 'true');
+    expect(cartItem2).toHaveAttribute('data-can-decrease', 'true');
   });
 
   it('renders with single item without separator', () => {
@@ -147,5 +205,14 @@ describe('CartItemList', () => {
     const emptyState = container.querySelector('.emptyState');
     expect(emptyState).toBeInTheDocument();
     expect(emptyState).toHaveClass('emptyState');
+  });
+
+  it('renders correctly with isLoading prop', () => {
+    render(<CartItemList {...defaultProps} isLoading={true} />);
+
+    expect(screen.getByTestId('cart-item-1')).toBeInTheDocument();
+    expect(screen.getByTestId('cart-item-2')).toBeInTheDocument();
+    expect(screen.getByText('Product 1 - Quantity: 2')).toBeInTheDocument();
+    expect(screen.getByText('Product 2 - Quantity: 1')).toBeInTheDocument();
   });
 });

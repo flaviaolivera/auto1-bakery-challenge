@@ -10,13 +10,17 @@ interface CartItemProps {
   onQuantityChange: (productId: string, newQuantity: number) => void;
   onRemove?: (productId: string) => void;
   isLoading?: boolean;
+  canIncrease?: boolean; 
+  canDecrease?: boolean;
 }
 
 export const CartItem: React.FC<CartItemProps> = ({
   cartItem,
   onQuantityChange,
   onRemove,
-  isLoading = false
+  isLoading = false,
+  canIncrease = true,
+  canDecrease = true
 }) => {
   const { product, quantity } = cartItem;
   const totalPrice = product.price * quantity;
@@ -34,7 +38,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   };
 
   return (
-    <div className={`d-flex align-items-center py-3 ${styles.cartItem} ${isLoading ? styles.loading : ''}`}>
+    <div className={`d-flex align-items-start py-3 ${styles.cartItem} ${isLoading ? styles.loading : ''}`}>
 
       <div className={`flex-shrink-0 ${styles.imageContainer}`}>
         <Thumbnail
@@ -43,8 +47,8 @@ export const CartItem: React.FC<CartItemProps> = ({
         />
       </div>
 
-      <div className={`flex-grow-1 ms-3 ${styles.productInfo}`}>
-        <h6 className={`mb-1 ${styles.productName}`}>
+      <div className={`flex-grow-1 text-start ms-3 ${styles.productInfo}`}>
+        <h6 className={`mb-1 fw-semibold ${styles.productName}`}>
           {product.name}
         </h6>
         <div className={styles.productPrice}>
@@ -53,7 +57,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       </div>
 
       <div className={`d-flex align-items-center ${styles.quantityControls}`}>
-        <span className={`me-1 ${styles.quantityDisplay}`}>
+        <span className={`me-1 fw-semibold ${styles.quantityDisplay}`}>
           {quantity}
         </span>
         
@@ -61,14 +65,14 @@ export const CartItem: React.FC<CartItemProps> = ({
           icon="FiMinus"
           size="large"
           onClick={handleQuantityDecrease}
-          disabled={isLoading}
+          disabled={isLoading || !canDecrease}
         />
         
         <IconButton
           icon="FiPlus"
           size="large"
           onClick={handleQuantityIncrease}
-          disabled={isLoading}
+          disabled={isLoading || !canIncrease}
         />
       </div>
     </div>

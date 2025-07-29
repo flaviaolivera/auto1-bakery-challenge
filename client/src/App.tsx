@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AnimatePresence } from 'motion/react';
 
-import { Home, Cart, Checkout, Confirmation } from './pages';
+import { Home, Cart } from './pages';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,8 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/confirmation" element={<Confirmation />} />
+            {/* <Route path="/checkout" element={<Checkout />} />
+            <Route path="/confirmation" element={<Confirmation />} /> */}
           </Routes>
         </AnimatePresence>
         

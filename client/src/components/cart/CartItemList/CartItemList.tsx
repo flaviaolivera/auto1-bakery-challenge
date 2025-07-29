@@ -9,13 +9,17 @@ interface CartItemListProps {
   onQuantityChange: (productId: string, newQuantity: number) => void;
   onRemove?: (productId: string) => void;
   isLoading?: boolean;
+  canIncreaseQuantity: (productId: string) => boolean;
+  canDecreaseQuantity?: (productId: string) => boolean;
 }
 
 export const CartItemList: React.FC<CartItemListProps> = ({
   items,
   onQuantityChange,
   onRemove,
-  isLoading = false
+  isLoading = false,
+  canIncreaseQuantity,
+  canDecreaseQuantity = () => true  
 }) => {
   if (items.length === 0) {
     return (
@@ -39,6 +43,8 @@ export const CartItemList: React.FC<CartItemListProps> = ({
             onQuantityChange={onQuantityChange}
             onRemove={onRemove}
             isLoading={isLoading}
+            canIncrease={canIncreaseQuantity(item.product.id)}
+            canDecrease={canDecreaseQuantity(item.product.id)}
           />
 
           {index < items.length - 1 && (
