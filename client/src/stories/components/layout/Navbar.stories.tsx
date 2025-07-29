@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Navbar } from '../../../components/layout/Navbar/Navbar';
+
 
 const meta: Meta<typeof Navbar> = {
   component: Navbar,
@@ -10,7 +12,14 @@ const meta: Meta<typeof Navbar> = {
     cartItemCount: {
       control: { type: 'number', min: 0, max: 200 }
     }
-  }
+  },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
