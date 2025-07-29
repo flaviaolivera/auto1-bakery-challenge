@@ -17,7 +17,6 @@ const Checkout: React.FC = () => {
   
   const totalPrice = getTotalPrice();
   const totalItems = getTotalItems();
-  const isEmpty = items.length === 0;
 
   const {
   register,
@@ -50,7 +49,6 @@ const onSubmit = async (data: CustomerInfoForm) => {
 
     navigate('/confirmation/success');
   } catch (error) {
-    console.error('Order creation failed:', error);
 
     toast.error('Failed to create order. Please try again.');
 

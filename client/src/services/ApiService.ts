@@ -27,7 +27,6 @@ export const getProducts = async (): Promise<Product[]> => {
       description: undefined,
     }));
   } catch (error) {
-    console.error('Error fetching products:', error);
     throw new Error('Failed to load products');
   }
 };
@@ -42,7 +41,6 @@ export const createOrder = async (orderData: OrderRequest): Promise<OrderRespons
       body: JSON.stringify(orderData),
     });
   } catch (error) {
-    console.error('Error creating order:', error);
     throw error;
   }
 };
