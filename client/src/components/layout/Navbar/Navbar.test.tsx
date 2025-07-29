@@ -4,20 +4,20 @@ import { Navbar } from './Navbar';
 
 describe('Navbar', () => {
   it('renders the brand name', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     expect(screen.getByText('Auto1 Bakery Challenge')).toBeInTheDocument();
   });
 
   it('renders the cart icon button', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const cartButton = screen.getByLabelText('Go to cart');
     expect(cartButton).toBeInTheDocument();
   });
 
   it('uses proper Bootstrap navbar structure', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const navbar = document.querySelector('nav');
     expect(navbar).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('Navbar', () => {
   });
 
   it('has accessible brand button', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const brandButton = screen.getByText('Auto1 Bakery Challenge');
     expect(brandButton.tagName).toBe('BUTTON');
@@ -36,7 +36,7 @@ describe('Navbar', () => {
   });
 
   it('has accessible cart button with aria-label', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const cartButton = screen.getByLabelText('Go to cart');
     expect(cartButton).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('Navbar', () => {
   });
 
   it('uses Bootstrap layout classes correctly', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const navbar = document.querySelector('nav');
     const container = navbar?.querySelector('.container-fluid');
@@ -70,7 +70,7 @@ describe('Navbar', () => {
   });
 
   it('does not show cart badge when cartItemCount is not provided', () => {
-    render(<Navbar />);
+    render(<Navbar cartItemCount={0} />);
     
     const badge = document.querySelector('.badge');
     expect(badge).not.toBeInTheDocument();
