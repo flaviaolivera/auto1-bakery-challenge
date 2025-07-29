@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 export interface ButtonProps {
-  label: string;
+  label: string | React.ReactNode;
   variant?: 'gradient-blue' | 'secondary' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
