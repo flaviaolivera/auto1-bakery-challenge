@@ -10,6 +10,10 @@ interface CartState {
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
+
+  getQuantityInCart: (productId: string) => number;
+  getAvailableStock: (product: Product) => number;
+  canAddToCart: (product: Product, requestedQuantity: number) => boolean;
 }
 
 export const useCartStore = create<CartState>((set, get) => ({
@@ -59,5 +63,23 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   getTotalItems: () => {
     return get().items.reduce((total, item) => total + item.quantity, 0);
+  },
+
+  // NEW: Get quantity of specific product in cart
+  getQuantityInCart: (productId: string) => {
+    const item = get().items.find(item => item.product.id === productId);
+    return item ? item.quantity : 0;
+  },
+
+  // NEW: Get available stock (total stock - quantity in cart)
+  getAvailableStock: (product: Product) => {
+    const quantityInCart = get().getQuantityInCart(product.id);
+    return Math.max(0, product.stock - quantityInCart);
+  },
+
+  // NEW: Check if we can add a specific quantity to cart
+  canAddToCart: (product: Product, requestedQuantity: number) => {
+    const availableStock = get().getAvailableStock(product);
+    return requestedQuantity <= availableStock;
   },
 }));

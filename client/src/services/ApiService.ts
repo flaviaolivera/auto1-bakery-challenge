@@ -1,6 +1,6 @@
 import { Product, ProductFromAPI, OrderRequest, OrderResponse } from '../types';
 
-const baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const baseURL = process.env.REACT_APP_API_URL;
 
 const fetchAPI = async <T>(endpoint: string, options?: RequestInit): Promise<T> => {
   const response = await fetch(`${baseURL}${endpoint}`, options);

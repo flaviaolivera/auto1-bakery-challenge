@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { ProductGrid } from './ProductGrid';
 import { Product } from '../../../types/Product';
 
@@ -32,19 +32,26 @@ const mockProducts: Product[] = [
 ];
 
 const mockOnAddToCart = jest.fn();
+const mockGetAvailableStock = (product: Product) => product.stock;
+
+// Render helper
+const renderProductGrid = (products = mockProducts) =>
+  render(
+    <ProductGrid
+      products={products}
+      onAddToCart={mockOnAddToCart}
+      getAvailableStock={mockGetAvailableStock}
+    />
+  );
 
 describe('ProductGrid', () => {
   beforeEach(() => {
     mockOnAddToCart.mockClear();
+    cleanup();
   });
 
   it('renders all products in a responsive grid', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     expect(screen.getByText('Test Product 1')).toBeInTheDocument();
     expect(screen.getByText('Test Product 2')).toBeInTheDocument();
@@ -58,12 +65,7 @@ describe('ProductGrid', () => {
   });
 
   it('passes onAddToCart prop to ProductCard components', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     const addToCartButtons = screen.getAllByText('Add to cart');
     fireEvent.click(addToCartButtons[0]);
@@ -72,12 +74,7 @@ describe('ProductGrid', () => {
   });
 
   it('renders each product as a ProductCard', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     const cards = document.querySelectorAll('.card');
     expect(cards).toHaveLength(3);
@@ -87,27 +84,16 @@ describe('ProductGrid', () => {
   });
 
   it('displays empty state when no products are provided', () => {
-    render(
-      <ProductGrid 
-        products={[]} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid([]);
 
     expect(screen.getByText('No products found')).toBeInTheDocument();
     expect(screen.queryByRole('grid')).not.toBeInTheDocument();
   });
 
   it('handles products with different states correctly', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     expect(screen.getAllByText('Add to cart')).toHaveLength(2);
-
     expect(screen.getAllByText('Out of stock')).toHaveLength(2);
 
     const images = document.querySelectorAll('.card-img-top');
@@ -115,12 +101,7 @@ describe('ProductGrid', () => {
   });
 
   it('maintains product order', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     const cardTitles = document.querySelectorAll('.card-title');
     expect(cardTitles[0]).toHaveTextContent('Test Product 1');
@@ -129,18 +110,13 @@ describe('ProductGrid', () => {
   });
 
   it('uses Bootstrap responsive breakpoints', () => {
-    render(
-      <ProductGrid 
-        products={mockProducts} 
-        onAddToCart={mockOnAddToCart} 
-      />
-    );
+    renderProductGrid();
 
     const columns = document.querySelectorAll('[class*="col-"]');
     columns.forEach(column => {
-      expect(column).toHaveClass('col-sm-6'); 
-      expect(column).toHaveClass('col-lg-4'); 
-      expect(column).toHaveClass('col-xl-3'); 
+      expect(column).toHaveClass('col-sm-6');
+      expect(column).toHaveClass('col-lg-4');
+      expect(column).toHaveClass('col-xl-3');
     });
   });
 });

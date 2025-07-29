@@ -13,6 +13,9 @@ const meta: Meta<typeof ProductGrid> = {
       action: 'add-to-cart'
     }
   },
+  args: {
+    getAvailableStock: (product: Product) => product.stock
+  },
   decorators: [
     (Story) => (
       <div className="container-fluid p-4">
@@ -93,15 +96,6 @@ const manyProducts: Product[] = [
     image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
     description: 'Durable travel backpack with laptop compartment.'
   },
-  {
-    id: '8',
-    name: 'Coffee Mug',
-    slug: 'coffee-mug',
-    price: 24.99,
-    stock: 50,
-    image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=400&h=400&fit=crop',
-    description: 'Ceramic mug perfect for your morning coffee.'
-  }
 ];
 
 export const Default: Story = {

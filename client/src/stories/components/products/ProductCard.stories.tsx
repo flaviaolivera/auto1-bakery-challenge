@@ -17,6 +17,10 @@ const meta: Meta<typeof ProductCard> = {
     },
     disabled: {
       control: { type: 'boolean' }
+    },
+    availableStock: {
+      control: { type: 'number' },
+
     }
   },
   decorators: [
@@ -72,38 +76,44 @@ const productWithLongName: Product = {
 
 export const Default: Story = {
   args: {
-    product: sampleProduct
+    product: sampleProduct,
+    availableStock: sampleProduct.stock
   }
 };
 
 export const OutOfStock: Story = {
   args: {
-    product: outOfStockProduct
+    product: outOfStockProduct,
+    availableStock: outOfStockProduct.stock
   }
 };
 
 export const WithoutImage: Story = {
   args: {
-    product: productWithoutImage
+    product: productWithoutImage,
+    availableStock: productWithoutImage.stock
   }
 };
 
 export const WithLongText: Story = {
   args: {
-    product: productWithLongName
+    product: productWithLongName,
+    availableStock: productWithLongName.stock
   }
 };
 
 export const Loading: Story = {
   args: {
     product: sampleProduct,
-    isLoading: true
+    isLoading: true,
+    availableStock: sampleProduct.stock
   }
 };
 
 export const Disabled: Story = {
   args: {
     product: sampleProduct,
-    disabled: true
+    disabled: true,
+    availableStock: sampleProduct.stock
   }
 };

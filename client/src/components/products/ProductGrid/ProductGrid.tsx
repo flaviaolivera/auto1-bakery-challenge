@@ -5,11 +5,15 @@ import { ProductCard } from '../ProductCard/ProductCard';
 interface ProductGridProps {
   products: Product[];
   onAddToCart: (productId: string, quantity: number) => void;
+  getAvailableStock: (product: Product) => number;
+  isLoading?: boolean;
 }
 
 export const ProductGrid: React.FC<ProductGridProps> = ({
   products,
-  onAddToCart
+  onAddToCart,
+  getAvailableStock,
+  isLoading = false
 }) => {
   if (products.length === 0) {
     return (
@@ -26,6 +30,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
           <ProductCard 
             product={product} 
             onAddToCart={onAddToCart}
+            availableStock={getAvailableStock(product)}
+            isLoading={isLoading}
           />
         </div>
       ))}
