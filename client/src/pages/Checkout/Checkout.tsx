@@ -58,16 +58,6 @@ const onSubmit = async (data: CustomerInfoForm) => {
   }
 };
 
-  useEffect(() => {
-    if (isEmpty) {
-      navigate('/cart');
-    }
-  }, [isEmpty, navigate]);
-
-  if (isEmpty) {
-    return null;
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
