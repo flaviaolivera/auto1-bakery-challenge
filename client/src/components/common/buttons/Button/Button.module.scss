@@ -28,7 +28,8 @@
 
 .gradient-blue {
   background: linear-gradient(135deg, #60A5FA 0%, $primary-color 100%);
-  color: white;
+  color: white !important;
+  font-weight: 600 !important;
 
   &:hover:not(:disabled) {
     background: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
