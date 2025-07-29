@@ -20,7 +20,7 @@ const Cart: React.FC = () => {
   } = useCart();
 
   return (
-    <div className="min-vh-100 bg-white">
+    <div className="min-vh-100 bg-white px-2">
       {isEmpty ? (
         <div className="container text-center py-5">
           <h3 className="text-muted mb-3">Your cart is empty</h3>
